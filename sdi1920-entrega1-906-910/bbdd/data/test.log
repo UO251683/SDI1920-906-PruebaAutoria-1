@@ -1,0 +1,67 @@
+/*C12*/SET SCHEMA PUBLIC
+drop table if exists friend CASCADE 
+drop table if exists petition CASCADE 
+drop table if exists user CASCADE 
+drop table if exists usuario CASCADE 
+drop sequence hibernate_sequence if exists
+create sequence hibernate_sequence start with 1 increment by 1
+create table friend (user_id bigint not null, friends_id bigint not null, primary key (user_id, friends_id))
+create table petition (user_id bigint not null, petitions_id bigint not null, primary key (user_id, petitions_id))
+create table user (id bigint not null, aceptado boolean, email varchar(255), last_name varchar(255), name varchar(255), password varchar(255), resend boolean, role varchar(255), primary key (id))
+create table usuario (user_id bigint not null, users_id bigint not null, primary key (user_id, users_id))
+alter table user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)
+alter table friend add constraint FKf1o55lv2ehr14drvykmka75r4 foreign key (friends_id) references user
+alter table friend add constraint FK3uu8s7yyof1qmenthngm24hry foreign key (user_id) references user
+alter table petition add constraint FKmq7ewjtgpge5tr8s93qxe9ncn foreign key (petitions_id) references user
+alter table petition add constraint FKj9r5a6n49yt87bb173s4omc46 foreign key (user_id) references user
+alter table usuario add constraint FK2kwh7agbrfc9b53buftdlnt32 foreign key (users_id) references user
+alter table usuario add constraint FKfxl3brc8dp10lbjwl1mk5tuyo foreign key (user_id) references user
+INSERT INTO USER VALUES(1,FALSE,'pedro@email.com','D\u00edaz','Pedro','$2a$10$eyf.I86yG7ZQj4y0SCXTBeuVK7nIFKJvmpBZtuEaiNkdZ4cNTSqdS',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 2
+COMMIT
+INSERT INTO USER VALUES(2,FALSE,'laura@email.com','Alvarez','Laura','$2a$10$2Z7h09T7bTEoNP/qb.fjT.28Y4TVeI7J568MI.kmMyN02ebRDNxnm',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 3
+COMMIT
+INSERT INTO USER VALUES(3,FALSE,'maria@email.com','Rodr\u00edguez','Mar\u00eda','$2a$10$2ViLTWfopdnrphcmUoJ1e.PTY76DM16XWYeF5R.xSBng4hXhRNLky',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 4
+COMMIT
+INSERT INTO USER VALUES(4,FALSE,'marta@email.com','Almonte','Marta','$2a$10$byu0UyLLlbP7CAp.sKFc6.MwvUVFRrLhWMBxgtllw0NJPqtLdm9Wi',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 5
+COMMIT
+INSERT INTO USER VALUES(5,FALSE,'pelayo@email.com','Valdes','Pelayo','$2a$10$hOOIhwqjmsD/HhMIKQuhaewj/fbqg1lNDsg6yXX.gUMgWjLa04Lwa',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 6
+COMMIT
+INSERT INTO USER VALUES(6,FALSE,'admin@email.com','Root','Admin','$2a$10$F/ANHIPnOvhaXGltGRqcieeC0rz58Z8Dnhadz6XfOHqKExBTIVmyC',FALSE,'ROLE_ADMIN')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 7
+COMMIT
+INSERT INTO USER VALUES(7,FALSE,'ramon@email.com','Feijo','Ramon','$2a$10$Vz7dG9s8dfppuCsnjaZ.VeMxUwvabxAG62EgVQWrloGhZq2wk3Gdy',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 8
+COMMIT
+INSERT INTO USER VALUES(8,FALSE,'adrimart@email.com','Martinez','Adrian','$2a$10$vt.0MXBsiUjkLWNhqorzTOpvgauMevziWqzNlunjm95IjBcWRX.rG',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 9
+COMMIT
+INSERT INTO USER VALUES(9,FALSE,'dario@email.com','Rodr\u00edguez','Dario','$2a$10$Ck2b43xaVEMoXDIpEZWoauuuhrdilSrovVwUebzHfJsDA0Pls.53O',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 10
+COMMIT
+INSERT INTO USER VALUES(10,FALSE,'pedro12Bel@email.com','Belmonte','Pedro','$2a$10$FORinhf7sRXtSCewxSeThO.T4vWLyw8h.mliOD4OYFgKxF2oC5zHO',FALSE,'ROLE_USER')
+ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 11
+COMMIT
+DISCONNECT
+/*C13*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C14*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C15*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C16*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C17*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C18*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C19*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C20*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C21*/SET SCHEMA PUBLIC
+DISCONNECT

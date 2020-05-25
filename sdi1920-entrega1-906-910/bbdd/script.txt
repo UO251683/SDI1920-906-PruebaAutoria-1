@@ -1,0 +1,75 @@
+CREATE TABLE empleado (
+	idEmpleado INT NOT NULL,
+	nombreEmpleado VARCHAR(20),
+	dni VARCHAR(8),
+	cargo VARCHAR(20),
+	correo VARCHAR(20),
+	CONSTRAINT PK_EMPLEADO PRIMARY KEY (idEmpleado),
+	CONSTRAINT CHK_CARGO CHECK (cargo IN ('medico' , 'enfermero'))
+);
+
+CREATE TABLE jornadaLaboral (
+	idJornada INT NOT NULL,
+	idEmpleado INT NOT NULL,
+	fechaInicio DATE,
+	fechaFin DATE,
+	CONSTRAINT PK_JORNADA PRIMARY KEY (idJornada),
+	CONSTRAINT FK_JORNADA FOREIGN KEY (idEmpleado) REFERENCES empleado (idEmpleado)
+);
+
+CREATE TABLE paciente (
+	idPaciente INT NOT NULL,
+	dni VARCHAR(8),
+	nombrePaciente VARCHAR(8),
+	contacto VARCHAR(8),
+	CONSTRAINT PK_PACIENTE PRIMARY KEY (idPaciente)
+);
+
+CREATE TABLE historial (
+	idHistorial INT NOT NULL,
+	idPaciente INT NOT NULL,
+	datos VARCHAR(20),
+	CONSTRAINT PK_HISTORIAL PRIMARY KEY (idHistorial),
+	CONSTRAINT FK_HISTORIAL FOREIGN KEY (idPaciente) REFERENCES paciente (idPaciente)
+);
+
+CREATE TABLE cita (
+	idCita INT NOT NULL,
+	idPaciente INT NOT NULL,
+	idEmpleado INT NOT NULL,
+	urgente BOOLEAN,
+	sala VARCHAR(20),
+	fechaInicio DATE,
+	fechaFin DATE,
+	sintomas VARCHAR(20),
+	prescripciones VARCHAR(20),
+	CONSTRAINT PK_CITA PRIMARY KEY (idCita),
+	CONSTRAINT FK_CITA_PACIENTE FOREIGN KEY (idPaciente) REFERENCES paciente (idPaciente),
+	CONSTRAINT FK_CITA_EMPLEADO FOREIGN KEY (idEmpleado) REFERENCES empleado (idEmpleado)
+);
+
+INSERT INTO empleado VALUES (1, 'Jaime', '1', 'medico', 'jaime@uniovi.es');
+INSERT INTO empleado VALUES (2, 'Luison', '2', 'medico', 'luison@uniovi.es');
+INSERT INTO empleado VALUES (3, 'Noe', '3', 'enfermero', 'noe@uniovi.es');
+INSERT INTO empleado VALUES (4, 'Andrés', '4', 'enfermero', 'andres@uniovi.es');
+
+insert into paciente values ('1', '00112233', 'Luis', 'luis@uo');
+insert into paciente values ('2', '12345678', 'Jaime', 'jaim@uo');
+insert into paciente values ('3', '11223344', 'Andrés', 'and@uo');
+insert into paciente values ('4', '55667788', 'Yago', 'yago@uo');
+
+insert into historial values ('1', '1', 'dolor rodilla');
+insert into historial values ('2', '2', 'dolor cabeza');
+insert into historial values ('3', '3', 'dolor brazo');
+insert into historial values ('4', '4', 'herida');
+
+insert into empleado (IDEMPLEADO, nombreEmpleado) values ('1', 'Manolo');
+insert into cita (idCita, idPaciente, idEmpleado) values('1','1','1');
+insert into cita (idCita, idPaciente, idEmpleado) values('2','2','1');
+insert into cita (idCita, idPaciente, idEmpleado) values('3','3','1');
+insert into cita (idCita, idPaciente, idEmpleado) values('4','4','1');
+
+SELECT DATOS FROM HISTORIAL, CITA WHERE CITA.IDEMPLEADO = 1 AND CITA.IDPACIENTE = HISTORIAL.IDPACIENTE;
+
+SELECT IDCITA FROM CITA WHERE IDEMPLEADO = 1;
+
