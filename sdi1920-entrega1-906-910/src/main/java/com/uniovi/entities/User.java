@@ -3,6 +3,9 @@ import javax.persistence.*;
 
 import java.util.Set; //A collection that contains no duplicate elements
 
+//Declara y organiza todos los datos de cada entidad User que se cargarán.
+//Si queremos un nuevo campo, tendrá que verse reflejado primero aquí.
+//Luego de añadirlo, ya podríamos tratar ese nuevo campo en el Controller, el Service y el Repository si hiciera falta.
 @Entity
 public class User {
 	
@@ -33,6 +36,10 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="friend")
 	private Set<User> friends;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="favorite")
+	private Set<User> favs;
 	
 	public User(String email, String name, String lastName) {
 		super();
@@ -99,6 +106,14 @@ public class User {
 	
 	public Set<User> getFriends() {
 		return friends;
+	}
+	
+	public void setFavs(Set<User> favs) {
+		this.favs = favs;
+	}
+	
+	public Set<User> getFavs() {
+		return favs;
 	}
 	
 	public String getFullName() {

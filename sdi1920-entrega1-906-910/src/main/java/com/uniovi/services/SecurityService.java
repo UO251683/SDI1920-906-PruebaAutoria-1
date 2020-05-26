@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+//Este servicio se encarga de la autenticación de los usuarios
 @Service
 public class SecurityService {
 	
@@ -21,6 +22,7 @@ public class SecurityService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
 	
+	//Devuelve al usuario autenticado
 	public String findLoggedInEmail() {
 		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
 		if (userDetails instanceof UserDetails) {
@@ -29,6 +31,7 @@ public class SecurityService {
 		return null;
 	}
 	
+	//Permite el inicio automático de sesión después de que un usuario cree una cuenta
 	public void autoLogin(String email, String password) {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 

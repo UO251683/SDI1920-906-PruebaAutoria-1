@@ -5,9 +5,11 @@
 	<!-- Barra de NavegaciÃ³n superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 th:text="#{friends.message}">Amigos</h2>
-		
-		<p th:text="#{friendslist.message}">Lista de amigos:  </p>
+		<h2>Lista de favoritos</h2>
+		<form class="navbar-form" action="/user/favorits">
+		</form>
+		<p th:text="#{userlist.message}">Los usuarios que actualmente figuran en la lista de favoritos son los
+			siguientes: </p>
 
 		<div class="table-responsive">
 			<table class="table table-hover">
@@ -15,7 +17,6 @@
 					<tr>
 						<th>Email</th>
 						<th th:text="#{name.message}">Nombre</th>
-						<th th:text="#{lastname.message}">Apellido</th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
@@ -24,11 +25,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="user : ${friendsList}">
+					<tr th:each="user : ${favsList}">
+						<div th:if="${user.role == 'ROLE_USER'}" >
 						<td th:text="${user.email}"></td>
 						<td th:text="${user.name}"></td>
-						<td th:text="${user.lastName}"></td>
-						<td><a sec:authorize="hasRole('ROLE_USER')" th:text="#{fav.message}" th:href="${'/user/' + user.id + '/agregarFavorito'}">Añadir a favoritos</a></td>
+						<td><a sec:authorize="hasRole('ROLE_USER')" th:text="#{delete.message}" th:href="${'/user/' + user.id + '/eliminarFavorito'}">Eliminar</a></td>
+						</div>
 					</tr>
 				</tbody>
 			</table>

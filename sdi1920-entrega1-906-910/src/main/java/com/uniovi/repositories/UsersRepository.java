@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+//Interfaz que saca los datos de la bbdd de los usuarios. Añade algunos métodos a CrudRepository
+//Se usa en: UserService y UserDetailsServiceImpl
 public interface UsersRepository extends CrudRepository<User, Long>{
 	
 	@Query("SELECT r FROM User r WHERE (LOWER(r.name) LIKE LOWER(?1) OR LOWER(r.lastName) LIKE LOWER(?1) OR LOWER(r.email) LIKE LOWER(?1))")

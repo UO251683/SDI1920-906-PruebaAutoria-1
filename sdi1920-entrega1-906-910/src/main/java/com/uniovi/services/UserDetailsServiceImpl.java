@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.*;
-
+//Servicio que usa el userRepository para sobreescribir un método de DetailsService
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
